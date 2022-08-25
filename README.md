@@ -27,7 +27,7 @@ Airflow is a platform created by the community to programmatically author, sched
       cd airflow
 - Configure a variável de ambiente. O comando abaixo criará o arquivo .env com os valores das variáveis.
 
-      echo -e "AIRFLOW_UID=$(id -U)\nAIRFLOW_GID=0" > .env
+      echo -e "AIRFLOW_UID=$(id -u)\nAIRFLOW_GID=0" > .env
 - Compile o container docker com os comandos abaixo. Esse passo pode demorar.
 
       docker-compose up airflow-init
@@ -35,7 +35,9 @@ Airflow is a platform created by the community to programmatically author, sched
 
       docker-compose up
 
-OBS: Nos testes executados, o docker, com os containers rodando, consumiram mais de 8GB de RAM.
+**OBS-1**: Nos testes executados, o docker, com os containers rodando, consumiram mais de 8GB de RAM.
+
+**OBS-2**: No Windows, utilize o terminal Git Bash (em vez do cmd padrão ou PowerShell).
 
 
 ## E agora?
