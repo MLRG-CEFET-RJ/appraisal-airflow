@@ -19,17 +19,23 @@ Airflow is a platform created by the community to programmatically author, sched
 ## Windows
 - [Instale o Docker](https://docs.docker.com/engine/install/)
 - [Instale o Docker Compose](https://docs.docker.com/compose/install/)
-- Navegue até o diretório C:\Users\SEU-USUÁRIO\
 - Baixe o projeto com o comando 
-        
-        git clone https://github.com/PhilippeBrissant/airflow.git
-- Entre na pasta \airflow
-        
-        cd airflow
-- Compile e rode o container docker com os comandos abaixo:
 
-        docker-compose build
-        docker-compose up
+      git clone https://github.com/PhilippeBrissant/airflow.git
+- Entre na pasta \airflow
+
+      cd airflow
+- Configure a variável de ambiente. O comando abaixo criará o arquivo .env com os valores das variáveis.
+
+      echo -e "AIRFLOW_UID=$(id -U)\nAIRFLOW_GID=0" > .env
+- Compile o container docker com os comandos abaixo. Esse passo pode demorar.
+
+      docker-compose up airflow-init
+- Rode o container o comando abaixo. Esse passo pode demorar um pouco.
+
+      docker-compose up
+
+OBS: Nos testes executados, o docker, com os containers rodando, consumiram mais de 8GB de RAM.
 
 
 ## E agora?
@@ -83,7 +89,7 @@ with DAG(dag_id="meu_dag",
     )
         
     thirdTask = DummyOperator(
-        task_id="task2"
+        task_id="task3"
     )
 
     firstTask >> secondTask >> thirdTask
@@ -94,7 +100,7 @@ Tomemos como exemplo o [pipeline_teste.py](./dags/pipeline_teste.py). A figura a
 ![](./docs/prints/pipeline-teste.jpg)
 
 ## Visualizando e Executando os DAGs
-Se estiver tudo funcionando e o DAG estiver dentro do diretório **C:\Users\SEU-USUÁRIO\airflow\dags**, basta acessar `localhost:8080` e fazer login com ``airflow`` e **senha** ``airflow``. Clique em *DAGs* e procure pelo seu DAG.
+Se estiver tudo funcionando e o DAG estiver dentro do diretório **\airflow\dags**, basta acessar `localhost:8080` e fazer login com ``airflow`` e **senha** ``airflow``. Clique em *DAGs* e procure pelo seu DAG.
 ![](./docs/prints/busca_dag.jpg)
 
 Ao abrir o DAG, clique em *Graph* para ver o grafo (diagrama). Clique no *play* e em *Trigger DAG* para executá-lo.

@@ -16,7 +16,7 @@ with DAG(dag_id="meu_dag",
     )
         
     thirdTask = DummyOperator(
-        task_id="task2"
+        task_id="task3"
     )
 
     firstTask >> secondTask >> thirdTask

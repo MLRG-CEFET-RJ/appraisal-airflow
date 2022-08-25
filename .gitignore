@@ -1,0 +1,9 @@
+#pasta de logs
+logs
+
+#pasta de plugins
+plugins
+
+#variáveis de ambiente
+.env
+
