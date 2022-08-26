@@ -1,6 +1,8 @@
 # G1-P4-Airflow
 Pipeline Airflow para execução dos algoritmos de inputação de dados ausentes do framework Appraisal.
 
+# Vídeo de demonstração
+[Vídeo](https://youtu.be/LTzqtOtFYvM) demonstrando como rodar o ariflow e executar os DAGs.
 # Sumário
 - [O que é o Airflow?](#o-que-é-o-airflow)
 - [Instalação](#Instalação)
@@ -120,6 +122,21 @@ Nesse nosso exemplo não precisamos, mas é possível também, ao executar um DA
 
 ![](./docs/prints/config-json.jpg)
 
+Na própria página, no rodapé, há uma dica de como acessar os dados informados no json, basta utilizar `{{ dag_run.conf['dataset'] }}` . 
+
+Poderia, por exemplo passar o argumento para a task:
+
+      readConfigTask = PythonOperator(
+            task_id="readConfig",
+            python_callable=loadDataset,
+            op_kwargs={'dataset': "{{ dag_run.conf['dataset'] }}"}
+      )
+
+O método `loadDataset` chamado no operador acima, precisa conter a lista `**kwargs` em sua assinatura:
+
+      def loadDataset(ti, **kwargs):
+            print('Dataset escolhido: %s' % kwargs['dataset'])
+            ti.xcom_push(key='dataset', value=kwargs['dataset'])
 ## Vídeo de demonstração da execução do pipeline_teste.py
 
 [![Demonstração de pipeline de teste com Apache Airflow](./docs/prints/pipeline-teste2.jpg)](https://www.youtube.com/watch?v=Z1WBhJcU10Q)
