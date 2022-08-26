@@ -7,3 +7,5 @@ plugins
 #variáveis de ambiente
 .env
 
+#cache do python
+dags/__pycache__
